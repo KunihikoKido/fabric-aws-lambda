@@ -1,0 +1,3 @@
+*.pyc
+lambda_function.zip
+fabric.py*
