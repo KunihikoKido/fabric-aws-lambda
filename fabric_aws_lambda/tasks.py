@@ -29,11 +29,11 @@ class SetupTask(BaseTask):
 
     def __init__(self,
             requirements='requirements.txt',
-            python_path='./lib',
+            lib_path='./lib',
             install_prefix='./local'
         ):
         self.requirements = requirements
-        self.python_path = python_path
+        self.lib_path = lib_path
         self.install_prefix = install_prefix
         self.tempdir = tempfile.gettempdir()
 
@@ -43,11 +43,11 @@ class SetupTask(BaseTask):
     def install_python_modules(self):
         options = dict(
             requirements=self.requirements,
-            python_path=self.python_path
+            lib_path=self.lib_path
         )
 
         local("""pip install --upgrade \
-            -r {requirements} -t {python_path}""".format(**options))
+            -r {requirements} -t {lib_path}""".format(**options))
 
 class InvokeTask(BaseTask):
     """Invoke function on Local Machine."""
@@ -57,13 +57,13 @@ class InvokeTask(BaseTask):
             lambda_handler='lambda_handler',
             lambda_file='lambda_function.py',
             event_file='event.json',
-            python_path='./lib'
+            lib_path='./lib'
         ):
         self.options = dict(
             lambda_handler=lambda_handler,
             lambda_file=lambda_file,
             event_file=event_file,
-            python_path=python_path
+            lib_path=lib_path
         )
 
     def run_main(self, event_file=None):
@@ -75,7 +75,7 @@ class InvokeTask(BaseTask):
 
         local("""
         python-lambda-local \
-            -l {python_path} \
+            -l {lib_path} \
             -f {lambda_handler} {lambda_file} {event_file}
         """.format(**self.options))
 
@@ -87,11 +87,11 @@ class MakeZipTask(BaseTask):
     def __init__(self,
             zip_file='lambda_function.zip',
             exclude_file='exclude.lst',
-            python_path='./lib'
+            lib_path='./lib'
         ):
         self.zip_file = zip_file
         self.exclude_file = exclude_file
-        self.python_path = python_path
+        self.lib_path = lib_path
 
     def run_main(self):
         self.remove_zip_file()
@@ -109,10 +109,10 @@ class MakeZipTask(BaseTask):
         self.makezip()
 
     def makezip_python_modules(self):
-        if not os.path.exists(self.python_path):
+        if not os.path.exists(self.lib_path):
             return
 
-        with lcd(self.python_path):
+        with lcd(self.lib_path):
             self.makezip()
 
 class AWSLambdaGetConfigTask(BaseTask):
