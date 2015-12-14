@@ -12,7 +12,7 @@ setup(
     version='0.1',
     packages=['fabric_aws_lambda'],
     include_package_data=True,
-    license='Apache License, Version 2.0, see LICENSE',
+    license='see LICENSE',
     description='Fabric tasks for AWS Lambda Python',
     long_description=README,
     url='https://github.com/kunihikokido/fabric-aws-lambda',
