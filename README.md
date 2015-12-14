@@ -12,6 +12,14 @@
 pip install git+https://github.com/kunihikokido/fabric-aws-lambda.git
 ```
 
+## Task Commands
+* ``setup``: Setup on Local Machine.
+* ``invoke``: Invoke function on Local Machine.
+* ``makezip``: Make zip file for AWS Lambda Function.
+* ``aws-getconfig``: Get function configuration on AWS Lambda.
+* ``aws-invoke``: Invoke function on AWS Lambda.
+* ``aws-updatecode``: Update code on AWS Lambda.
+
 ## Example: Directory structure
 
 ```bash
@@ -112,11 +120,7 @@ class SetupTask(BaseSetupTask):
 
 ```
 
+## Example: Projects
 
-## Task Commands
-* ``setup``: Setup on Local Machine.
-* ``invoke``: Invoke function on Local Machine.
-* ``makezip``: Make zip file for AWS Lambda Function.
-* ``aws-getconfig``: Get function configuration on AWS Lambda.
-* ``aws-invoke``: Invoke function on AWS Lambda.
-* ``aws-updatecode``: Update code on AWS Lambda.
+* [aws-lambda-geoip](https://github.com/KunihikoKido/aws-lambda-geoip)
+* [aws-lambda-ja-tokenizer](https://github.com/KunihikoKido/aws-lambda-ja-tokenizer)
