@@ -33,7 +33,7 @@ def clean():
 
 task_setup = SetupTask(
     requirements=REQUIREMENTS_TXT,
-    python_path=LIB_PATH,
+    lib_path=LIB_PATH,
     install_prefix=INSTALL_PREFIX
 )
 
@@ -41,12 +41,12 @@ task_invoke = InvokeTask(
     lambda_file=LAMBDA_FILE,
     lambda_handler=LAMBDA_HANDLER,
     event_file=EVENT_FILE,
-    python_path=LIB_PATH
+    lib_path=LIB_PATH
 )
 task_makezip = MakeZipTask(
     zip_file=ZIP_FILE,
     exclude_file=ZIP_EXCLUDE_FILE,
-    python_path=LIB_PATH
+    lib_path=LIB_PATH
 )
 
 task_aws_invoke = AWSLambdaInvokeTask(

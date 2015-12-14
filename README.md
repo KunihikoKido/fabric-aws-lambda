@@ -1,9 +1,13 @@
-# Fabric Tasks for AWS Lambda function development tasks
+# Fabric Tasks for AWS Lambda function development
 
 ## Install
 
 ```shell
 pip install git+https://github.com/kunihikokido/fabric-aws-lambda.git
+mkdir myproject
+cd myproject
+wget https://raw.githubusercontent.com/KunihikoKido/fabric-aws-lambda/master/fabfile.py.template
+mv fabfile.py.template fabfile.py
 ```
 
 ## Example fabfile.py
