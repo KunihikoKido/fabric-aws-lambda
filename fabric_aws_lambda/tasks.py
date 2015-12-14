@@ -4,8 +4,8 @@ import json
 import tempfile
 from fabric.api import local
 from fabric.api import lcd
+from fabric.api import shell_env
 from fabric.tasks import Task
-
 
 class BaseTask(Task):
     def run(self, *args, **kwargs):
@@ -73,11 +73,12 @@ class InvokeTask(BaseTask):
         if event_file is not None:
             self.options['event_file'] = event_file
 
-        local("""
-        python-lambda-local \
-            -l {lib_path} \
-            -f {lambda_handler} {lambda_file} {event_file}
-        """.format(**self.options))
+        with shell_env(PYTHONPATH=self.lib_path):
+            local("""
+            python-lambda-local \
+                -l {lib_path} \
+                -f {lambda_handler} {lambda_file} {event_file}
+            """.format(**self.options))
 
 
 class MakeZipTask(BaseTask):
