@@ -117,7 +117,7 @@ class MakeZipTask(BaseTask):
 
 class AWSLambdaGetConfigTask(BaseTask):
     """Get function configuration on AWS Lambda."""
-    name = 'aws-get-config'
+    name = 'aws-getconfig'
 
     def __init__(self, function_name='hello-lambda', qualifier='\$LATEST'):
 
@@ -196,7 +196,7 @@ class AWSLambdaInvokeTask(BaseTask):
 
 class AWSLambdaUpdateCodeTask(BaseTask):
     """Update code on AWS Lambda."""
-    name = 'aws-update-code'
+    name = 'aws-updatecode'
 
     def __init__(self,
             function_name='hello-lambda',

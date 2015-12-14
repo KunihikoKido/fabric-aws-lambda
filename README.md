@@ -32,9 +32,9 @@ task6 = AWSLambdaUpdateCodeTask(LAMBDA_FUNCTION_NAME)
 fab --list
 Available commands:
 
-    aws-lambda-get-config   Get function configuration on AWS Lambda.
-    aws-lambda-invoke       Invoke function on AWS Lambda.
-    aws-lambda-update-code  Update code on AWS Lambda.
+    aws-getconfig           Get function configuration on AWS Lambda.
+    aws-invoke              Invoke function on AWS Lambda.
+    aws-updatecode          Update code on AWS Lambda.
     invoke                  Invoke function on Local Machine.
     makezip                 Make zip file for AWS Lambda Function.
     setup                   Setup on Local Machine.
