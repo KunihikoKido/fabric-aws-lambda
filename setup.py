@@ -18,9 +18,4 @@ setup(
     url='https://github.com/kunihikokido/fabric-aws-lambda',
     author='Kunihiko Kido',
     author_email='kunihiko.kido@me.com',
-    install_requires=[
-        "fabric",
-        "python-lambda-local",
-        "awscli"
-    ]
 )
