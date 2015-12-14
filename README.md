@@ -12,7 +12,21 @@
 pip install git+https://github.com/kunihikokido/fabric-aws-lambda.git
 ```
 
-## Template fabfile.py
+## Example: Directory structure
+
+```bash
+sample/
+├── event.json
+├── exclude.lst
+├── fabfile.py
+├── lambda_function.py
+├── lib/
+├── local/
+└── requirements.txt
+```
+
+
+## Example: fabfile.py
 
 ```python
 # -*- coding: utf-8 -*-
@@ -81,16 +95,7 @@ task_aws_updatecode = AWSLambdaUpdateCodeTask(
 )
 ```
 
-
-## Task Commands
-* ``aws-getconfig``: Get function configuration on AWS Lambda.
-* ``aws-invoke``: Invoke function on AWS Lambda.
-* ``aws-updatecode``: Update code on AWS Lambda.
-* ``invoke``: Invoke function on Local Machine.
-* ``makezip``: Make zip file for AWS Lambda Function.
-* ``setup``: Setup on Local Machine.
-
-## Customize
+## Example: Customize Task
 
 ```python
 from fabric.api import local
@@ -106,3 +111,12 @@ class SetupTask(BaseSetupTask):
         local('gzip -d GeoLite2-City.mmdb.gz')
 
 ```
+
+
+## Task Commands
+* ``setup``: Setup on Local Machine.
+* ``invoke``: Invoke function on Local Machine.
+* ``makezip``: Make zip file for AWS Lambda Function.
+* ``aws-getconfig``: Get function configuration on AWS Lambda.
+* ``aws-invoke``: Invoke function on AWS Lambda.
+* ``aws-updatecode``: Update code on AWS Lambda.
