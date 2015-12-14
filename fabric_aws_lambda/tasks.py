@@ -73,7 +73,7 @@ class InvokeTask(BaseTask):
         if event_file is not None:
             self.options['event_file'] = event_file
 
-        with shell_env(PYTHONPATH=self.lib_path):
+        with shell_env(PYTHONPATH=self.options['lib_path']):
             local("""
             python-lambda-local \
                 -l {lib_path} \
