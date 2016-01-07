@@ -27,11 +27,7 @@ class SetupTask(BaseTask):
     """Setup on Local Machine."""
     name = 'setup'
 
-    def __init__(self,
-            requirements='requirements.txt',
-            lib_path='./lib',
-            install_prefix='./local'
-        ):
+    def __init__(self, requirements='requirements.txt', lib_path='./lib', install_prefix='./local'):
         self.requirements = requirements
         self.lib_path = lib_path
         self.install_prefix = install_prefix
@@ -53,17 +49,13 @@ class InvokeTask(BaseTask):
     """Invoke function on Local Machine."""
     name = 'invoke'
 
-    def __init__(self,
-            lambda_handler='lambda_handler',
-            lambda_file='lambda_function.py',
-            event_file='event.json',
-            lib_path='./lib'
-        ):
+    def __init__(self, lambda_handler='lambda_handler', lambda_file='lambda_function.py', event_file='event.json', lib_path='./lib', timeout=3):
         self.options = dict(
             lambda_handler=lambda_handler,
             lambda_file=lambda_file,
             event_file=event_file,
-            lib_path=lib_path
+            lib_path=lib_path,
+            timeout=timeout
         )
 
     def run_main(self, event_file=None):
@@ -76,6 +68,7 @@ class InvokeTask(BaseTask):
         with shell_env(PYTHONPATH=self.options['lib_path']):
             local("""
             python-lambda-local \
+                -t {timeout} \
                 -l {lib_path} \
                 -f {lambda_handler} {lambda_file} {event_file}
             """.format(**self.options))
@@ -85,11 +78,7 @@ class MakeZipTask(BaseTask):
     """Make zip file for AWS Lambda Function."""
     name = 'makezip'
 
-    def __init__(self,
-            zip_file='lambda_function.zip',
-            exclude_file='exclude.lst',
-            lib_path='./lib'
-        ):
+    def __init__(self, zip_file='lambda_function.zip', exclude_file='exclude.lst', lib_path='./lib'):
         self.zip_file = zip_file
         self.exclude_file = exclude_file
         self.lib_path = lib_path
@@ -147,19 +136,12 @@ class AWSLambdaInvokeTask(BaseTask):
     """Invoke function on AWS Lambda."""
     name = 'aws-invoke'
 
-    def __init__(self,
-            function_name='hello-lambda',
-            invocation_type='RequestResponse',
-            log_type='Tail',
-            client_context = '',
-            payload='file://event.json',
-            qualifier='\$LATEST'
-        ):
+    def __init__(self, function_name='hello-lambda', payload='file://event.json', qualifier='\$LATEST'):
 
         self.options = dict(
             function_name=function_name,
-            invocation_type=invocation_type,
-            log_type=log_type,
+            invocation_type='RequestResponse',
+            log_type='Tail',
             payload=payload,
             qualifier=qualifier,
             outfile=os.path.join(tempfile.gettempdir(), 'outfile.txt')
@@ -199,10 +181,7 @@ class AWSLambdaUpdateCodeTask(BaseTask):
     """Update code on AWS Lambda."""
     name = 'aws-updatecode'
 
-    def __init__(self,
-            function_name='hello-lambda',
-            zip_file='fileb://lambda_function.zip'
-        ):
+    def __init__(self, function_name='hello-lambda', zip_file='fileb://lambda_function.zip'):
         self.options = dict(
             function_name=function_name,
             zip_file=zip_file

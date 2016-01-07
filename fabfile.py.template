@@ -26,6 +26,7 @@ EVENT_FILE = os.path.join(BASE_PATH, 'event.json')
 ZIP_FILE = os.path.join(BASE_PATH, 'lambda_function.zip')
 ZIP_EXCLUDE_FILE = os.path.join(BASE_PATH, 'exclude.lst')
 
+
 @task
 def clean():
     for target in [ZIP_FILE, LIB_PATH, INSTALL_PREFIX]:
@@ -41,7 +42,8 @@ task_invoke = InvokeTask(
     lambda_file=LAMBDA_FILE,
     lambda_handler=LAMBDA_HANDLER,
     event_file=EVENT_FILE,
-    lib_path=LIB_PATH
+    lib_path=LIB_PATH,
+    timeout=300
 )
 task_makezip = MakeZipTask(
     zip_file=ZIP_FILE,
